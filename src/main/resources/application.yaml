@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: example-nbp-currency-exchange
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+      nbp:
+        url: https://api.nbp.pl
+
+accountsConfig:
+  accountConfigList:
+    -
+      owner: AccountOwner01
+      iban: iban_ao01_01
+      balance: 100
+    -
+      owner: AccountOwner01
+      iban: iban_ao01_02
+      balance: 123
+    -
+      owner: AccountOwner02
+      iban: iban_ao02_01
+      balance: 0
+    -
+      owner: AccountOwner03
+      iban: iban_ao03_01
+      balance: -100
+    -
+      owner: AccountOwner04
+      iban: iban_ao04_01
+      balance: 4
