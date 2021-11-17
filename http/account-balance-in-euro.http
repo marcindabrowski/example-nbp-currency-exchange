@@ -1,0 +1,119 @@
+### Account owner 01 with account 01
+GET {{nbp-exchenge-address}}/accounts/AccountOwner01/iban_ao01_01/euroBalanceExchangeInfo
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Balanse in Euro is 466.14", function() {
+        var balanceInEuro = response.body.balanceInEuro;
+        client.assert(balanceInEuro === 466.14, "Expected that balance in Euro is 466.14 but received '" + balanceInEuro + "'");
+    });
+
+    client.test("Exchange rate date is today or earlier", function() {
+        var exchangeRateDate = Date.parse(response.body.exchangeRateDate);
+        client.assert(exchangeRateDate <= new Date(), "Expected that exchange rate date is today or earlier but received '" + response.body.exchangeRateDate + "'");
+    });
+%}
+
+### Account owner 01 with account 02
+GET {{nbp-exchenge-address}}/accounts/AccountOwner01/iban_ao01_02/euroBalanceExchangeInfo
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Balanse in Euro is 573.35", function() {
+        var balanceInEuro = response.body.balanceInEuro;
+        client.assert(balanceInEuro === 573.35, "Expected that balance in Euro is 573.35 but received '" + balanceInEuro + "'");
+    });
+
+    client.test("Exchange rate date is today or earlier", function() {
+        var exchangeRateDate = Date.parse(response.body.exchangeRateDate);
+        client.assert(exchangeRateDate <= new Date(), "Expected that exchange rate date is today or earlier but received '" + response.body.exchangeRateDate + "'");
+    });
+%}
+
+### Account owner 02 with account 01
+GET {{nbp-exchenge-address}}/accounts/AccountOwner02/iban_ao02_01/euroBalanceExchangeInfo
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Balanse in Euro is 0", function() {
+        var balanceInEuro = response.body.balanceInEuro;
+        client.assert(balanceInEuro === 0, "Expected that balance in Euro is 0 but received '" + balanceInEuro + "'");
+    });
+
+    client.test("Exchange rate date is today or earlier", function() {
+        var exchangeRateDate = Date.parse(response.body.exchangeRateDate);
+        client.assert(exchangeRateDate <= new Date(), "Expected that exchange rate date is today or earlier but received '" + response.body.exchangeRateDate + "'");
+    });
+%}
+
+### Account owner 03 with account 01
+GET {{nbp-exchenge-address}}/accounts/AccountOwner03/iban_ao03_01/euroBalanceExchangeInfo
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Balanse in Euro is 0", function() {
+        var balanceInEuro = response.body.balanceInEuro;
+        client.assert(balanceInEuro === 0, "Expected that balance in Euro is 0 but received '" + balanceInEuro + "'");
+    });
+
+    client.test("Exchange rate date is today or earlier", function() {
+        var exchangeRateDate = Date.parse(response.body.exchangeRateDate);
+        client.assert(exchangeRateDate <= new Date(), "Expected that exchange rate date is today or earlier but received '" + response.body.exchangeRateDate + "'");
+    });
+%}
+
+### Account owner 04 with account 01
+GET {{nbp-exchenge-address}}/accounts/AccountOwner04/iban_ao04_01/euroBalanceExchangeInfo
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Balanse in Euro is 18.65", function() {
+        var balanceInEuro = response.body.balanceInEuro;
+        client.assert(balanceInEuro === 18.65, "Expected that balance in Euro is 18.65 but received '" + balanceInEuro + "'");
+    });
+
+    client.test("Exchange rate date is today or earlier", function() {
+        var exchangeRateDate = Date.parse(response.body.exchangeRateDate);
+        client.assert(exchangeRateDate <= new Date(), "Expected that exchange rate date is today or earlier but received '" + response.body.exchangeRateDate + "'");
+    });
+%}
