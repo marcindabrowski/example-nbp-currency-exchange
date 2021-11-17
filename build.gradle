@@ -1,0 +1,132 @@
+buildscript {
+    ext.spock_version = "2.0-groovy-3.0"
+}
+
+plugins {
+    id "codenarc"
+    id "com.adarshr.test-logger" version "3.1.0"
+    id "groovy"
+    id "java"
+    id "org.springframework.boot" version "2.5.6"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+group = "com.github.marcindabrowski"
+version = "0.0.1-SNAPSHOT"
+
+sourceSets {
+    integration {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    integration {
+        extendsFrom testRuntimeClasspath
+        description = "Dependencies for integration tests"
+        transitive = true
+        visible = true
+    }
+
+    integrationImplementation.extendsFrom testImplementation
+    integrationRuntimeOnly.extendsFrom testRuntime
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign:3.0.5"
+
+    compileOnly "org.projectlombok:lombok"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor "org.projectlombok:lombok"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.spockframework:spock-core:$spock_version"
+    testImplementation "org.spockframework:spock-spring:$spock_version"
+
+    integration "com.github.tomakehurst:wiremock-jre8-standalone:2.31.0"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(GroovyCompile) {
+    groovyOptions.optimizationOptions.indy = true
+    options.encoding = "UTF-8"
+}
+
+sourceSets {
+    integration {
+        groovy {
+            srcDir("src/integration/groovy")
+        }
+        resources.srcDir("src/integration/resources")
+        compileClasspath = sourceSets.main.output +
+                sourceSets.test.output +
+                configurations.testRuntimeClasspath +
+                configurations.integration
+        runtimeClasspath = output + compileClasspath + configurations.testRuntimeClasspath
+    }
+}
+
+task unitTest(type: Test) {
+    group = "Verification"
+    description = "Runs the unit tests."
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+task integrationTest(type: Test) {
+    group = "Verification"
+    description = "Runs the integration tests."
+    testClassesDirs = sourceSets.integration.output.classesDirs
+    classpath = sourceSets.integration.runtimeClasspath
+    shouldRunAfter "unitTest"
+}
+
+tasks.named("test") {
+    it.group = "Verification"
+    it.description = "Runs the unit and the integration tests."
+
+    it.dependsOn unitTest, integrationTest
+
+    // test task should only bring its task dependencies to the execution graph but not run itself
+    it.enabled = false
+}
+
+tasks.withType(Test).configureEach { testTask ->
+    testTask.configure {
+        useJUnitPlatform()
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                if (result.testCount == 0) {
+                    throw new IllegalStateException("No tests were found. Failing the build")
+                }
+            }
+        }
+    }
+}
+
+check.dependsOn unitTest, integrationTest
+
+codenarc {
+    toolVersion = "2.2.0"
+    reportFormat = "console"
+    configFile = rootProject.file("CodenarcRuleSet.groovy")
+}
