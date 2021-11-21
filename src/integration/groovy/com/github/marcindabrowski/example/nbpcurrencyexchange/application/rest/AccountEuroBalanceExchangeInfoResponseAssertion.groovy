@@ -26,7 +26,15 @@ class AccountEuroBalanceExchangeInfoResponseAssertion {
             assert response.body.balanceInEuro == balanceInEuro
         }
 
+        void hasBalanceInEuroSet() {
+            assert response.body.balanceInEuro != null
+        }
+
         void hasExchangeRateDate(LocalDate exchangeRateDate) {
+            assert LocalDate.parse(response.body.exchangeRateDate as String) == exchangeRateDate
+        }
+
+        void hasExchangeRateDateLessOrEqual(LocalDate exchangeRateDate) {
             assert LocalDate.parse(response.body.exchangeRateDate as String) <= exchangeRateDate
         }
     }

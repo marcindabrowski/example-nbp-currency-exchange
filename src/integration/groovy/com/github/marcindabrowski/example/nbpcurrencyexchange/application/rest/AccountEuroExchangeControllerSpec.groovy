@@ -23,6 +23,7 @@ import static com.github.marcindabrowski.example.nbpcurrencyexchange.TestData.DE
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 
+@SuppressWarnings("Duplicates")
 class AccountEuroExchangeControllerSpec extends BaseIntegrationTest implements RestApiAbility {
 
     @Unroll
@@ -36,8 +37,8 @@ class AccountEuroExchangeControllerSpec extends BaseIntegrationTest implements R
         then: "the account balance in Euro is returned"
             AccountEuroBalanceExchangeInfoResponseAssertion.assertThat(responseEntity) {
                 hasStatusCode(OK)
-                hasBalanceInEuro(balanceAfterExchange)
-                hasExchangeRateDate(today)
+                hasBalanceInEuroSet()
+                hasExchangeRateDateLessOrEqual(today)
             }
 
         where:
