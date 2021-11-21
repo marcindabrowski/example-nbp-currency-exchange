@@ -1,6 +1,9 @@
 spring:
   application:
     name: example-nbp-currency-exchange
+  cloud:
+    compatibility-verifier:
+      enabled: false
 
 feign:
   client:
