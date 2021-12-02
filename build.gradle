@@ -59,7 +59,7 @@ dependencies {
     testImplementation "org.spockframework:spock-core:$spock_version"
     testImplementation "org.spockframework:spock-spring:$spock_version"
 
-    integration "com.github.tomakehurst:wiremock-jre8-standalone:2.31.0"
+    integration "com.github.tomakehurst:wiremock-jre8:2.32.0"
 }
 
 tasks.withType(JavaCompile) {
