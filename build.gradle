@@ -1,5 +1,8 @@
 buildscript {
     ext.spock_version = "2.0-groovy-3.0"
+    dependencies {
+        classpath "org.owasp:dependency-check-gradle:6.5.0.1"
+    }
 }
 
 plugins {
@@ -10,6 +13,8 @@ plugins {
     id "org.springframework.boot" version "2.6.1"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
+
+apply plugin: "org.owasp.dependencycheck"
 
 java {
     toolchain {
@@ -60,6 +65,12 @@ dependencies {
     testImplementation "org.spockframework:spock-spring:$spock_version"
 
     integration "com.github.tomakehurst:wiremock-jre8:2.32.0"
+
+    constraints {
+        implementation("commons-io:commons-io:2.11.0") {
+            because "Versions 2.2 used by org.springframework.cloud:spring-cloud-starter-openfeign have known vulnerability CVE-2021-29425"
+        }
+    }
 }
 
 tasks.withType(JavaCompile) {

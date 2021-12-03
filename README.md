@@ -31,3 +31,9 @@ Java 17
 ## Running API tests on locally available application
 
 From InteliJ run all tests in file [account-balance-in-euro.http](http/account-balance-in-euro.http).
+
+## OWASP vulnerable components check
+
+```./gradlew dependencyCheckAnalyze```
+
+More info: https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html
