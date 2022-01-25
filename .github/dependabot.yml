@@ -8,10 +8,3 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-
-  # Maintain dependencies for Gradle
-  - package-ecosystem: "gradle"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10

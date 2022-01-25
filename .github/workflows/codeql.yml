@@ -4,9 +4,27 @@ on:
   workflow_dispatch:
 
   push:
+    paths-ignore:
+      - '.github/dependabot.yml'
+      - '.github/pull_request_template.md'
+      - '.github/renovate.json5'
+      - 'http/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
 
   pull_request:
-    types: [ opened, edited ]
+    types:
+      - opened
+      - edited
+    paths-ignore:
+      - '.github/dependabot.yml'
+      - '.github/pull_request_template.md'
+      - '.github/renovate.json5'
+      - 'http/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
 
 jobs:
   build:
