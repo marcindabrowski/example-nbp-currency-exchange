@@ -51,7 +51,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-example-nbp-currency-exchange-
 
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
