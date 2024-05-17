@@ -1,6 +1,6 @@
 {
-    extends: [
-        "config:base",
-        ":dependencyDashboard",
-    ]
+  extends: [
+    "config:best-practices",
+    ":semanticCommitType(chore)"
+  ]
 }
