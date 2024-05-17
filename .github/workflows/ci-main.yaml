@@ -1,0 +1,33 @@
+name: Continuous Integration Build
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch: ~
+
+jobs:
+  gradle-checks:
+    name: Run Gradle checks
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@main
+    permissions:
+      contents: read
+    with:
+      add-gradle-job-summary-as-pr-comment: never
+      java-distribution: temurin
+      java-version: 17
+      run-sonar-scan: false
+
+  lint-repository-files:
+    name: Lint all files
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    permissions:
+      checks: write
+      contents: read
+    with:
+      lint-editorconfig: true
+      lint-github-workflows: true
+      lint-renovate-config: true
+      lint-yaml-files: true
