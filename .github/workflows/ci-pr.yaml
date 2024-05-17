@@ -18,6 +18,7 @@ jobs:
       github-workflows: ${{ steps.filter.outputs.github-workflows }}
       gradle-files: ${{ steps.filter.outputs.gradle-files }}
       renovate-config: ${{ steps.filter.outputs.renovate-config }}
+      source-code: ${{ steps.filter.outputs.source-code }}
       yaml-files: ${{ steps.filter.outputs.yaml-files }}
     permissions:
       pull-requests: read
@@ -41,9 +42,23 @@ jobs:
               - "settings.gradle"
             renovate-config:
               - ".github/renovate.json5"
+            source-code:
+              - "src/main/**/*.*"
             yaml-files:
               - "**/*.yaml"
               - "**/*.yml"
+
+  codeql-analysis:
+    name: CodeQL Analysis
+    if: ${{ needs.changes.outputs.source-code == 'true' }}
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@main
+    needs: changes
+    permissions:
+      contents: read
+      security-events: write
+    with:
+      java-distribution: temurin
+      java-version: 17
 
   gradle-checks:
     name: Run Gradle checks
