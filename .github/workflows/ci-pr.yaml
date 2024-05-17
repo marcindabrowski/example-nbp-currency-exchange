@@ -47,6 +47,7 @@ jobs:
 
   gradle-checks:
     name: Run Gradle checks
+    if: ${{ needs.changes.outputs.gradle-files == 'true' }}
     uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@main
     needs: changes
     permissions:
