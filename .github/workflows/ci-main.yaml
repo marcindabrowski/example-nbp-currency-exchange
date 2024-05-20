@@ -9,6 +9,16 @@ on:
   workflow_dispatch: ~
 
 jobs:
+  codeql-analysis:
+    name: CodeQL Analysis
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@main
+    permissions:
+      contents: read
+      security-events: write
+    with:
+      java-distribution: temurin
+      java-version: 17
+
   gradle-checks:
     name: Run Gradle checks
     uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@main
