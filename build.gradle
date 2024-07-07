@@ -137,7 +137,7 @@ tasks.withType(Test).configureEach { testTask ->
 check.dependsOn unitTest, integrationTest
 
 codenarc {
-    toolVersion = "2.2.0"
+    toolVersion = "3.5.0"
     reportFormat = "console"
     configFile = rootProject.file("CodenarcRuleSet.groovy")
 }
