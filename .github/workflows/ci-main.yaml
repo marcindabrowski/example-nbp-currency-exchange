@@ -11,7 +11,7 @@ on:
 jobs:
   codeql-analysis:
     name: CodeQL Analysis
-    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     permissions:
       contents: read
       security-events: write
@@ -21,7 +21,7 @@ jobs:
 
   gradle-checks:
     name: Run Gradle checks
-    uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     permissions:
       contents: read
     with:
@@ -32,7 +32,7 @@ jobs:
 
   lint-repository-files:
     name: Lint all files
-    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     permissions:
       checks: write
       contents: read

@@ -51,7 +51,7 @@ jobs:
   codeql-analysis:
     name: CodeQL Analysis
     if: ${{ needs.changes.outputs.source-code == 'true' }}
-    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-codeql.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     needs: changes
     permissions:
       contents: read
@@ -63,7 +63,7 @@ jobs:
   gradle-checks:
     name: Run Gradle checks
     if: ${{ needs.changes.outputs.gradle-files == 'true' }}
-    uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-gradle-check.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     needs: changes
     permissions:
       contents: read
@@ -76,7 +76,7 @@ jobs:
 
   lint-repository-files:
     name: Lint changed files
-    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@6ff24bccdf8521cd4994cc99c8c1252513266a70 # main
     needs: changes
     permissions:
       checks: write
